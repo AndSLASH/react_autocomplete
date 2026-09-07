@@ -31,11 +31,15 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
   };
 
   const filteredPeople = useMemo(() => {
-    const normalizedQuery = appliedQuery.trim().toLowerCase();
-
-    if (!normalizedQuery) {
+    if (appliedQuery === '') {
       return people;
     }
+
+    if (!appliedQuery.trim()) {
+      return [];
+    }
+
+    const normalizedQuery = appliedQuery.trim().toLowerCase();
 
     return people.filter(person =>
       person.name.toLowerCase().includes(normalizedQuery),
